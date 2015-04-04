@@ -1,0 +1,4 @@
+[package]
+name = "sorter"
+version = "0.1"
+authors = ["Douman <custparasite@gmx.se>"]
