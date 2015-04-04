@@ -1,6 +1,5 @@
 /// Sorter functions
 
-
 /// Implementation of insertion sort
 /// @victim Mutable array
 pub fn insertion_sort<T: Ord>(victim: &mut [T]) {
@@ -27,6 +26,51 @@ pub fn shell_sort<T: Ord + Clone>(victim: &mut [T]) {
             victim[j] = temp;
         }
     }
+}
+
+/// Implementation of shaker sort
+pub fn shaker_sort<T: Ord>(victim: &mut [T]) {
+    for _ in 0..victim.len() / 2 + 1 {
+        let mut begin: usize = 0;
+        let mut ending: usize = victim.len() - 1;
+
+        loop {
+            if victim[begin] > victim[begin+1] { victim.swap(begin, begin+1); }
+            if victim[ending-1] > victim[ending] { victim.swap(ending, ending-1); }
+            begin += 1;
+            ending -= 1;
+
+            if begin >= ending { break; }
+        }
+    }
+}
+
+/// Implementation of quick sort
+fn int_quick_sort<T: Ord + Clone>(victim: &mut [T], left: usize, right: usize) {
+    if left >= right { return; }
+
+    let middle = victim[(left+right)/2].clone();
+    let mut left_temp = left;
+    let mut right_temp = right;
+
+    while left_temp <= right_temp {
+        while left_temp < right && victim[left_temp] < middle { left_temp += 1; }
+        while right_temp > left && victim[right_temp] > middle { right_temp -= 1; }
+        if left_temp <= right_temp {
+            victim.swap(left_temp, right_temp);
+            left_temp += 1;
+            right_temp -= 1;
+        }
+    }
+
+    int_quick_sort(victim, left, right_temp);
+    int_quick_sort(victim, left_temp, right);
+}
+
+/// Quick sort
+pub fn quick_sort<T: Ord + Clone>(victim: &mut [T]) {
+    let last: usize = victim.len() - 1;
+    int_quick_sort(victim, 0, last);
 }
 
 /// Implementation of bubble sort

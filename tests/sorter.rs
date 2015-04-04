@@ -1,6 +1,6 @@
 extern crate sorter;
 
-use sorter::{insertion_sort, shell_sort, bubble_sort};
+use sorter::*;
 
 fn check_order<T: Ord>(array: &mut [T]) -> bool {
     for i in 1..array.len() {
@@ -30,6 +30,32 @@ fn verify_insertion_sort() {
 
     for array in main_vec.iter_mut() {
         insertion_sort(array);
+        if !check_order(array) {
+            println!("Incorrectly ordered array: {:?}", array);
+            assert!(false);
+        }
+    }
+}
+
+#[test]
+fn verify_quick_sort() {
+    let mut main_vec = make_test_vec();
+
+    for array in main_vec.iter_mut() {
+        quick_sort(array);
+        if !check_order(array) {
+            println!("Incorrectly ordered array: {:?}", array);
+            assert!(false);
+        }
+    }
+}
+
+#[test]
+fn verify_shaker_sort() {
+    let mut main_vec = make_test_vec();
+
+    for array in main_vec.iter_mut() {
+        shaker_sort(array);
         if !check_order(array) {
             println!("Incorrectly ordered array: {:?}", array);
             assert!(false);
