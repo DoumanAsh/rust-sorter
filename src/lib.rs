@@ -44,32 +44,29 @@ pub fn shaker_sort<T: Ord>(victim: &mut [T]) {
 }
 
 /// Implementation of quick sort
-/// Unstable?
-fn int_quick_sort<T: Ord + Clone>(victim: &mut [T], left: usize, right: usize) {
-    if left >= right { return; }
+pub fn quick_sort<T: Ord>(victim: &mut [T]) {
+    let mut last: usize = victim.len();
+    if last < 2 { return; }
 
-    let middle = victim[(left+right)/2].clone();
-    let mut left_temp = left;
-    let mut right_temp = right;
+    let middle = last / 2;
+    last -= 1;
 
-    while left_temp <= right_temp {
-        while left_temp <= right && victim[left_temp] < middle { left_temp += 1; }
-        while right_temp >= left && victim[right_temp] > middle { right_temp -= 1; }
-        if left_temp <= right_temp {
-            victim.swap(left_temp, right_temp);
-            left_temp += 1;
-            right_temp -= 1;
+    //choice of pivot and partition
+    victim.swap(middle, last);
+
+    let mut pivot_index = 0;
+    for i in 0..last {
+        if victim[i] <= victim[last] {
+            victim.swap(i, pivot_index);
+            pivot_index += 1;
         }
     }
 
-    int_quick_sort(victim, left, right_temp);
-    int_quick_sort(victim, left_temp, right);
-}
+    victim.swap(pivot_index, last);
 
-/// Quick sort wrapper around implementation
-pub fn quick_sort<T: Ord + Clone>(victim: &mut [T]) {
-    let last: usize = victim.len() - 1;
-    int_quick_sort(victim, 0, last);
+    //next sort
+    quick_sort(&mut victim[0..pivot_index]);
+    quick_sort(&mut victim[pivot_index+1..last+1]);
 }
 
 /// Implementation of bubble sort
