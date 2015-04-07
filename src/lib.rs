@@ -34,18 +34,17 @@ pub fn shaker_sort<T: Ord>(victim: &mut [T]) {
         let mut begin: usize = 0;
         let mut ending: usize = victim.len() - 1;
 
-        loop {
+        while begin <= ending {
             if victim[begin] > victim[begin+1] { victim.swap(begin, begin+1); }
             if victim[ending-1] > victim[ending] { victim.swap(ending, ending-1); }
             begin += 1;
             ending -= 1;
-
-            if begin >= ending { break; }
         }
     }
 }
 
 /// Implementation of quick sort
+/// Unstable?
 fn int_quick_sort<T: Ord + Clone>(victim: &mut [T], left: usize, right: usize) {
     if left >= right { return; }
 
@@ -54,8 +53,8 @@ fn int_quick_sort<T: Ord + Clone>(victim: &mut [T], left: usize, right: usize) {
     let mut right_temp = right;
 
     while left_temp <= right_temp {
-        while left_temp < right && victim[left_temp] < middle { left_temp += 1; }
-        while right_temp > left && victim[right_temp] > middle { right_temp -= 1; }
+        while left_temp <= right && victim[left_temp] < middle { left_temp += 1; }
+        while right_temp >= left && victim[right_temp] > middle { right_temp -= 1; }
         if left_temp <= right_temp {
             victim.swap(left_temp, right_temp);
             left_temp += 1;
@@ -67,7 +66,7 @@ fn int_quick_sort<T: Ord + Clone>(victim: &mut [T], left: usize, right: usize) {
     int_quick_sort(victim, left_temp, right);
 }
 
-/// Quick sort
+/// Quick sort wrapper around implementation
 pub fn quick_sort<T: Ord + Clone>(victim: &mut [T]) {
     let last: usize = victim.len() - 1;
     int_quick_sort(victim, 0, last);
