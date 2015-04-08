@@ -15,11 +15,15 @@ fn make_test_vec() -> Vec<Vec<i32>> {
 
     make_test_vec = vec![1, 2, 3, 4, 5, 6, 7];
     main_vec.push(make_test_vec);
+    make_test_vec = vec![1, 2, 3, 4, 5, 6];
+    main_vec.push(make_test_vec);
     make_test_vec = vec![7, 6, 5, 4, 3, 2, 1];
     main_vec.push(make_test_vec);
     make_test_vec = vec![5, 10, 1, 3, 5, 2, 3];
     main_vec.push(make_test_vec);
     make_test_vec = thread_rng().gen_iter::<i32>().take(1000).collect::<Vec<i32>>();
+    main_vec.push(make_test_vec);
+    make_test_vec = thread_rng().gen_iter::<i32>().take(555).collect::<Vec<i32>>();
     main_vec.push(make_test_vec);
 
     main_vec

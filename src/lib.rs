@@ -64,7 +64,7 @@ fn shift_down<T: Ord>(victim: &mut [T], start: usize, ending: usize) {
 pub fn heap_sort<T: Ord>(victim: &mut [T]) {
     let mut last = victim.len() - 1;
     //remember that range is exclusive for right element
-    for i in (0..(last - 1) / 2).rev() { shift_down(victim, i, last); }
+    for i in (0..(last+1) / 2).rev() { shift_down(victim, i, last); }
 
     last += 1;
     for i in (1..last).rev() {
