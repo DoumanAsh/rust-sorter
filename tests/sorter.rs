@@ -52,6 +52,19 @@ fn verify_quick_sort() {
 }
 
 #[test]
+fn verify_heap_sort() {
+    let mut main_vec = make_test_vec();
+
+    for array in main_vec.iter_mut() {
+        heap_sort(array);
+        if !check_order(array) {
+            println!("Incorrectly ordered array: {:?}", array);
+            assert!(false);
+        }
+    }
+}
+
+#[test]
 fn verify_shaker_sort() {
     let mut main_vec = make_test_vec();
 

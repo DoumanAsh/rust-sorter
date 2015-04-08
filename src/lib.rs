@@ -43,6 +43,35 @@ pub fn shaker_sort<T: Ord>(victim: &mut [T]) {
     }
 }
 
+/// ShiftDown for heap sort
+fn shift_down<T: Ord>(victim: &mut [T], start: usize, ending: usize) {
+    let mut root = start;
+    loop {
+        let mut child = root * 2 + 1;
+
+        if child > ending { break; }
+        else if child != ending && victim[child] < victim[child+1] { child += 1; }
+
+        if victim[root] < victim[child] {
+            victim.swap(root, child);
+            root = child;
+        }
+        else { break; }
+    }
+}
+
+/// Implementation of heap sort
+pub fn heap_sort<T: Ord>(victim: &mut [T]) {
+    let mut last = victim.len() - 1;
+    //remember that range is exclusive for right element
+    for i in (0..(last - 1) / 2).rev() { shift_down(victim, i, last); }
+
+    last += 1;
+    for i in (1..last).rev() {
+        victim.swap(0, i);
+        shift_down(victim, 0, i-1); }
+}
+
 /// Implementation of quick sort
 pub fn quick_sort<T: Ord>(victim: &mut [T]) {
     let mut last: usize = victim.len();
