@@ -2,6 +2,14 @@
 name = "sorter"
 version = "0.2.0"
 authors = ["Douman <custparasite@gmx.se>"]
+license = "MIT"
+repository = "https://github.com/DoumanAsh/rust-sorter"
+description = "Simple rust implementation of all existing sorts"
 
 [dependencies]
 rand = "*"
+
+[lib]
+name = "sorter"
+path = "src/lib.rs"
+test = false
