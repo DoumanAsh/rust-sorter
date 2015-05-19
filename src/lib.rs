@@ -44,6 +44,7 @@ pub fn shaker_sort<T: Ord>(victim: &mut [T]) {
 }
 
 /// ShiftDown for heap sort
+#[inline(always)]
 fn shift_down<T: Ord>(victim: &mut [T], start: usize, ending: usize) {
     let mut root = start;
     loop {
@@ -62,11 +63,11 @@ fn shift_down<T: Ord>(victim: &mut [T], start: usize, ending: usize) {
 
 /// Implementation of heap sort
 pub fn heap_sort<T: Ord>(victim: &mut [T]) {
-    let mut last = victim.len() - 1;
+    let last = victim.len() - 1;
     //remember that range is exclusive for right element
     for i in (0..(last+1) / 2).rev() { shift_down(victim, i, last); }
 
-    last += 1;
+    let last = last + 1;
     for i in (1..last).rev() {
         victim.swap(0, i);
         shift_down(victim, 0, i-1); }
@@ -74,11 +75,11 @@ pub fn heap_sort<T: Ord>(victim: &mut [T]) {
 
 /// Implementation of quick sort
 pub fn quick_sort<T: Ord>(victim: &mut [T]) {
-    let mut last: usize = victim.len();
+    let last: usize = victim.len();
     if last < 2 { return; }
 
     let middle = last / 2;
-    last -= 1;
+    let last = last - 1;
 
     //choice of pivot and partition
     victim.swap(middle, last);
