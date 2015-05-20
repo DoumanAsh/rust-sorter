@@ -1,6 +1,5 @@
 extern crate sorter;
 extern crate rand;
-
 use sorter::*;
 use rand::{Rng, thread_rng};
 
@@ -33,8 +32,19 @@ fn make_test_vec() -> Vec<Vec<i32>> {
 fn verify_insertion_sort() {
     let mut main_vec = make_test_vec();
 
+    println!("Usual:");
     for array in main_vec.iter_mut() {
         insertion_sort(array);
+        if !check_order(array) {
+            println!("Incorrectly ordered array: {:?}", array);
+            assert!(false);
+        }
+    }
+
+    main_vec = make_test_vec();
+    println!("Binary:");
+    for array in main_vec.iter_mut() {
+        binary_insertion_sort(array);
         if !check_order(array) {
             println!("Incorrectly ordered array: {:?}", array);
             assert!(false);
@@ -106,3 +116,5 @@ fn verify_bubble_sort() {
         }
     }
 }
+
+

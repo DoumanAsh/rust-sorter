@@ -11,6 +11,25 @@ pub fn insertion_sort<T: Ord>(victim: &mut [T]) {
     }
 }
 
+/// Implementation of insertion sort
+/// Binary variant. NOT WORKING
+pub fn binary_insertion_sort<T: Ord>(victim: &mut [T]) {
+    for i in 1..victim.len() {
+        let mut low = 0;
+        let mut up = i;
+        while low < up {
+            let mid = (low + up) / 2;
+            if victim[mid] <= victim[i] {
+                low = mid + 1;
+            }
+            else {
+                up = mid;
+            }
+        }
+        victim.swap(low, i);
+    }
+}
+
 /// Implementation of shell sort
 pub fn shell_sort<T: Ord + Clone>(victim: &mut [T]) {
     let gaps = [701, 301, 132, 57, 23, 10, 4, 1];
