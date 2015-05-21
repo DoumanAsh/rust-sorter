@@ -1,7 +1,7 @@
-/// Sorter functions
+/// Sorter functions.
 
-/// Implementation of insertion sort
-/// @victim Mutable array
+/// Implementation of insertion sort.
+/// @victim Mutable array.
 pub fn insertion_sort<T: Ord>(victim: &mut [T]) {
     for i in 1..victim.len() {
         for j in (0..i).rev() {
@@ -11,8 +11,8 @@ pub fn insertion_sort<T: Ord>(victim: &mut [T]) {
     }
 }
 
-/// Binary search which looks after key in sorted array
-/// Kinda useful in partly sorted arrays
+/// Binary search which looks after key in sorted array.
+/// Kinda useful in partly sorted arrays.
 #[inline(always)]
 fn binary_search_right<T: Ord>(victim: &[T], key: &T, mut low: usize, mut high: usize) -> usize {
     while low < high {
@@ -24,8 +24,8 @@ fn binary_search_right<T: Ord>(victim: &[T], key: &T, mut low: usize, mut high: 
     low
 }
 
-/// Implementation of insertion sort
-/// Binary variant. NOT WORKING
+/// Implementation of insertion sort.
+/// Employs binary search.
 pub fn binary_insertion_sort<T: Ord>(victim: &mut [T]) {
     for i in 1..victim.len() {
         let key_loc = binary_search_right(victim, &victim[i], 0, i);
@@ -36,7 +36,8 @@ pub fn binary_insertion_sort<T: Ord>(victim: &mut [T]) {
     }
 }
 
-/// Implementation of shell sort
+/// Implementation of shell sort.
+/// Uses gap sequence: [701, 301, 132, 57, 23, 10, 4, 1]
 pub fn shell_sort<T: Ord + Clone>(victim: &mut [T]) {
     let gaps = [701, 301, 132, 57, 23, 10, 4, 1];
 
@@ -53,7 +54,7 @@ pub fn shell_sort<T: Ord + Clone>(victim: &mut [T]) {
     }
 }
 
-/// Implementation of shaker sort
+/// Implementation of shaker sort.
 pub fn shaker_sort<T: Ord>(victim: &mut [T]) {
     for _ in 0..victim.len() / 2 + 1 {
         let mut begin: usize = 0;
@@ -86,7 +87,7 @@ fn shift_down<T: Ord>(victim: &mut [T], start: usize, ending: usize) {
     }
 }
 
-/// Implementation of heap sort
+/// Implementation of heap sort.
 pub fn heap_sort<T: Ord>(victim: &mut [T]) {
     let last = victim.len() - 1;
     //remember that range is exclusive for right element
@@ -98,7 +99,7 @@ pub fn heap_sort<T: Ord>(victim: &mut [T]) {
         shift_down(victim, 0, i-1); }
 }
 
-/// Implementation of quick sort
+/// Implementation of quick sort.
 pub fn quick_sort<T: Ord>(victim: &mut [T]) {
     let last: usize = victim.len();
     if last < 2 { return; }
@@ -124,7 +125,7 @@ pub fn quick_sort<T: Ord>(victim: &mut [T]) {
     quick_sort(&mut victim[pivot_index+1..last+1]);
 }
 
-/// Implementation of bubble sort
+/// Implementation of bubble sort.
 pub fn bubble_sort<T: Ord>(victim: &mut [T]) {
     for _ in 0..victim.len() {
         for j in 1..victim.len() {
