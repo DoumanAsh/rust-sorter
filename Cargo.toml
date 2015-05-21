@@ -1,6 +1,6 @@
 [package]
 name = "sorter"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["Douman <custparasite@gmx.se>"]
 license = "MIT"
 repository = "https://github.com/DoumanAsh/rust-sorter"

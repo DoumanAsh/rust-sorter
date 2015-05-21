@@ -11,22 +11,28 @@ pub fn insertion_sort<T: Ord>(victim: &mut [T]) {
     }
 }
 
+/// Binary search which looks after key in sorted array
+/// Kinda useful in partly sorted arrays
+#[inline(always)]
+fn binary_search_right<T: Ord>(victim: &[T], key: &T, mut low: usize, mut high: usize) -> usize {
+    while low < high {
+        let mid = (low + high) / 2;
+        if *key < victim[mid] { high = mid; }
+        else { low = mid + 1; }
+    }
+
+    low
+}
+
 /// Implementation of insertion sort
 /// Binary variant. NOT WORKING
 pub fn binary_insertion_sort<T: Ord>(victim: &mut [T]) {
     for i in 1..victim.len() {
-        let mut low = 0;
-        let mut up = i;
-        while low < up {
-            let mid = (low + up) / 2;
-            if victim[mid] <= victim[i] {
-                low = mid + 1;
-            }
-            else {
-                up = mid;
-            }
+        let key_loc = binary_search_right(victim, &victim[i], 0, i);
+
+        for j in (key_loc..i).rev() {
+            victim.swap(j+1, j);
         }
-        victim.swap(low, i);
     }
 }
 

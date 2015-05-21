@@ -24,6 +24,12 @@ fn make_test_vec() -> Vec<Vec<i32>> {
     main_vec.push(make_test_vec);
     make_test_vec = thread_rng().gen_iter::<i32>().take(555).collect::<Vec<i32>>();
     main_vec.push(make_test_vec);
+    make_test_vec = thread_rng().gen_iter::<i32>().take(60).collect::<Vec<i32>>();
+    main_vec.push(make_test_vec);
+    make_test_vec = thread_rng().gen_iter::<i32>().take(120).collect::<Vec<i32>>();
+    main_vec.push(make_test_vec);
+    make_test_vec = thread_rng().gen_iter::<i32>().take(240).collect::<Vec<i32>>();
+    main_vec.push(make_test_vec);
 
     main_vec
 }
