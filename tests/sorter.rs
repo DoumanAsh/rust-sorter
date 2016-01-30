@@ -1,10 +1,12 @@
 extern crate sorter;
-extern crate rand;
 use sorter::*;
-use rand::{Rng, thread_rng};
 
-fn check_order<T: Ord>(array: &mut [T]) -> bool {
-    for i in 1..array.len() { if array[i-1] > array[i] { return false; } }
+fn check_order<T: Ord>(array: &[T]) -> bool {
+    for i in 1..array.len() {
+        if array[i-1] > array[i] {
+            return false;
+        }
+    }
     true
 }
 
@@ -19,16 +21,6 @@ fn make_test_vec() -> Vec<Vec<i32>> {
     make_test_vec = vec![7, 6, 5, 4, 3, 2, 1];
     main_vec.push(make_test_vec);
     make_test_vec = vec![5, 10, 1, 3, 5, 2, 3];
-    main_vec.push(make_test_vec);
-    make_test_vec = thread_rng().gen_iter::<i32>().take(1000).collect::<Vec<i32>>();
-    main_vec.push(make_test_vec);
-    make_test_vec = thread_rng().gen_iter::<i32>().take(555).collect::<Vec<i32>>();
-    main_vec.push(make_test_vec);
-    make_test_vec = thread_rng().gen_iter::<i32>().take(60).collect::<Vec<i32>>();
-    main_vec.push(make_test_vec);
-    make_test_vec = thread_rng().gen_iter::<i32>().take(120).collect::<Vec<i32>>();
-    main_vec.push(make_test_vec);
-    make_test_vec = thread_rng().gen_iter::<i32>().take(240).collect::<Vec<i32>>();
     main_vec.push(make_test_vec);
 
     main_vec

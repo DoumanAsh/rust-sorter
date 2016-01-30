@@ -13,7 +13,7 @@ pub fn insertion_sort<T: Ord>(victim: &mut [T]) {
 
 /// Binary search which looks after key in sorted array.
 /// Kinda useful in partly sorted arrays.
-#[inline(always)]
+#[inline]
 fn binary_search_right<T: Ord>(victim: &[T], key: &T, mut low: usize, mut high: usize) -> usize {
     while low < high {
         let mid = (low + high) / 2;
@@ -70,7 +70,7 @@ pub fn shaker_sort<T: Ord>(victim: &mut [T]) {
 }
 
 /// ShiftDown for heap sort
-#[inline(always)]
+#[inline]
 fn shift_down<T: Ord>(victim: &mut [T], start: usize, ending: usize) {
     let mut root = start;
     loop {

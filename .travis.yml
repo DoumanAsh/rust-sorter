@@ -1,0 +1,8 @@
+language: rust
+rust:
+    - beta
+
+script:
+    - cargo build --verbose
+    - cargo test --verbose
+    - cargo bench --verbose
