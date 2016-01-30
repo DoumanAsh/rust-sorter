@@ -10,7 +10,7 @@ fn check_order<T: Ord>(array: &[T]) -> bool {
     true
 }
 
-fn make_test_vec() -> Vec<Vec<i32>> {
+fn make_test_vec() -> Vec<Vec<u8>> {
     let mut make_test_vec = vec![10, 5, 1, 2, 4];
     let mut main_vec = vec![make_test_vec];
 
@@ -21,6 +21,8 @@ fn make_test_vec() -> Vec<Vec<i32>> {
     make_test_vec = vec![7, 6, 5, 4, 3, 2, 1];
     main_vec.push(make_test_vec);
     make_test_vec = vec![5, 10, 1, 3, 5, 2, 3];
+    main_vec.push(make_test_vec);
+    make_test_vec = include_bytes!("../test_string.txt").to_vec();
     main_vec.push(make_test_vec);
 
     main_vec
