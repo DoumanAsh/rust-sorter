@@ -102,7 +102,12 @@ pub fn heap_sort<T: Ord>(victim: &mut [T]) {
 /// Implementation of quick sort.
 pub fn quick_sort<T: Ord>(victim: &mut [T]) {
     let last: usize = victim.len();
-    if last < 2 { return; }
+    if last < 52 {
+        if last > 1 {
+            insertion_sort(&mut victim[..]);
+        }
+        return;
+    }
 
     let middle = last / 2;
     let last = last - 1;
